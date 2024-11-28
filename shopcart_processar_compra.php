@@ -1,11 +1,7 @@
 <?php
 include 'db.php';
 include 'shopcart_controller.php';
-//session_start();
-
-// Armazena informações do usuário
-$nome = $_SESSION['nome'];
-$email = $_SESSION['email'];
+session_start(); // Certifique-se de que a sessão está iniciada
 
 // Verifica se o usuário está logado
 if (!isset($_SESSION['email'])) {
@@ -13,12 +9,22 @@ if (!isset($_SESSION['email'])) {
     exit();
 }
 
+// Armazena informações do usuário
+$nome = $_SESSION['nome'];
+$email = $_SESSION['email'];
+$id_usuario = $_SESSION['id']; // Obter o ID do usuário da sessão
+
+// Verifique se o ID do usuário está definido e não está vazio
+if (empty($id_usuario)) {
+    $_SESSION['erro_compra'] = "ID do usuário não encontrado.";
+    header("Location: shopcart_erro_compra.php");
+    exit();
+}
+
 // Função para salvar o pedido no banco de dados (exemplo simples)
-function salvarPedido($carrinho, $total) {
+function salvarPedido($carrinho, $total, $id_usuario) {
     global $conn;
     
-    // Pega o ID do usuário que está na sessão
-    $id_usuario = null;  // Pegando o ID do usuário que está na sessão
     $data_pedido = date('Y-m-d H:i:s');
 
     // Tenta inserir o pedido no banco
@@ -56,7 +62,7 @@ if (isset($_POST['acao']) && $_POST['acao'] == 'finalizar') {
     $total = calcularTotalCarrinho();  // Calcula o total da compra
 
     // Salva o pedido no banco de dados
-    $erro = salvarPedido($_SESSION['carrinho'], $total);
+    $erro = salvarPedido($_SESSION['carrinho'], $total, $id_usuario); // Passa o ID do usuário
 
     if ($erro === true) {
         // Limpa o carrinho da sessão
@@ -77,4 +83,3 @@ if (isset($_POST['acao']) && $_POST['acao'] == 'finalizar') {
     exit();
 }
 ?>
-

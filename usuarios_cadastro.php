@@ -1,23 +1,22 @@
 <?php 
-include 'principal_controller.php'; // Inclua o controlador principal para gerenciar sessões
+include 'principal_controller.php'; 
 
-// Verifica se o usuário está logado
+
 if (!isset($_SESSION['email'])) {
-    header("Location: index.php"); // Redireciona para a página de login
+    header("Location: index.php"); 
     exit();
 }
 
 include 'header.php'; 
 include 'usuarios_controller.php';
 
-//Pega todos os usuários para preencher os dados da tabela
+
 $users = getUsers();
 
-//Variável que guarda o ID do usuário que será editado
+
 $userToEdit = null;
 
-// Verifica se existe o parâmetro edit pelo método GET
-// e sé há um ID para edição de usuário
+
 if (isset($_GET['edit'])) {
     $userToEdit = getUser($_GET['edit']);
 }
@@ -75,7 +74,7 @@ if (isset($_GET['edit'])) {
             <th>Email</th>
             <th>Ações</th>
         </tr>
-        <!--Faz um loop FOR no resultset de usuários e preenche a tabela-->
+      
         <?php foreach ($users as $user): ?>
                 <tr>
                     <td><?php echo $user['id']; ?></td>

@@ -50,7 +50,7 @@ function getProdutoPorId($id_produto) {
     return $result->fetch_assoc();
 }
 
-// Função para lidar com o logout
+
 if (isset($_POST['logout'])) {
     session_unset();
     session_destroy();
@@ -58,7 +58,7 @@ if (isset($_POST['logout'])) {
     exit();
 }
 
-// Adicionar produto ao carrinho via POST
+
 if (isset($_POST['adicionar_produto'])) {
     $id_produto = (int)$_POST['id_produto'];
     adicionarAoCarrinho($id_produto);
