@@ -8,8 +8,9 @@
 </head>
 <body class="d-flex flex-column min-vh-100 bg-light">
     <header class="bg-danger d-flex align-items-center" style="height: 3cm;">
-        <div class="container text-center">
-            <h1>Sistema e-Commerce</h1>
+        <div class="container text-center" >
+            <h1>Elixires Alcoólicos do Mago</h1>
+            <h2>De uma qualidade que nem a Magia explica!</h2>
         </div>
     </header>
     <nav class="navbar navbar-expand-lg p-0 navbar-dark bg-dark">
